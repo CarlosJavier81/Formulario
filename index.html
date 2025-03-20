@@ -36,28 +36,32 @@
                 <button class="btn btn-primary mt-3" onclick="nextStep()">Continuar</button>
             </div>
 
-            <!-- Paso 2: Ingreso de DNI para Alumnos -->
+            <!-- Paso 2: Ingreso de DNI solo para Alumnos -->
             <div class="step" id="step2">
                 <h4>Ingrese su DNI:</h4>
                 <input type="text" id="dniInput" class="form-control" placeholder="Ingrese su DNI">
                 <button class="btn btn-success mt-3" onclick="verifyDNI()">Verificar</button>
-                <button class="btn btn-secondary mt-3" onclick="prevStep(1)">Atrás</button>
+                <button class="btn btn-secondary mt-3" onclick="showStep(1)">Atrás</button>
                 <p id="dniError" class="text-danger mt-2" style="display: none;">DNI no encontrado.</p>
             </div>
 
-            <!-- Paso 3: Sección 1 - Datos del Usuario -->
+            <!-- Sección 1 - Datos del Usuario -->
             <div class="step" id="step3">
                 <div class="section-title">1. Datos del Usuario</div>
                 <form id="userForm">
-                    <div class="mb-2"><label class="form-label">Nombres y Apellidos:</label><input type="text" id="nombre" class="form-control" readonly></div>
-                    <div class="mb-2"><label class="form-label">Domicilio:</label><input type="text" id="domicilio" class="form-control" readonly></div>
-                    <div class="mb-2"><label class="form-label">Correo:</label><input type="text" id="correo" class="form-control" readonly></div>
-                    <div class="mb-2"><label class="form-label">Código:</label><input type="text" id="codigo" class="form-control" readonly></div>
-                    <div class="mb-2"><label class="form-label">Producto:</label><input type="text" id="producto" class="form-control" readonly></div>
-                    <div class="mb-2"><label class="form-label">Tipo Producto:</label><input type="text" id="tipoProducto" class="form-control" readonly></div>
-                    <div class="mb-2"><label class="form-label">Sede:</label><input type="text" id="sede" class="form-control" readonly></div>
+                    <div id="dniHijoContainer" class="mb-2" style="display: none;">
+                        <label class="form-label">DNI del Hijo(a) (Solo para Padres de Familia):</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-2"><label class="form-label">Nombres y Apellidos:</label><input type="text" id="nombre" class="form-control"></div>
+                    <div class="mb-2"><label class="form-label">Domicilio:</label><input type="text" id="domicilio" class="form-control"></div>
+                    <div class="mb-2"><label class="form-label">Correo:</label><input type="text" id="correo" class="form-control"></div>
+                    <div class="mb-2"><label class="form-label">Código:</label><input type="text" id="codigo" class="form-control"></div>
+                    <div class="mb-2"><label class="form-label">Producto:</label><input type="text" id="producto" class="form-control"></div>
+                    <div class="mb-2"><label class="form-label">Tipo Producto:</label><input type="text" id="tipoProducto" class="form-control"></div>
+                    <div class="mb-2"><label class="form-label">Sede:</label><input type="text" id="sede" class="form-control"></div>
                 </form>
-                <button class="btn btn-primary mt-3" onclick="nextStep()">Siguiente</button>
+                <button class="btn btn-primary mt-3" onclick="showStep(4)">Siguiente</button>
             </div>
 
             <!-- Sección 2 - Identificación del bien contratado -->
@@ -69,8 +73,7 @@
                     <div class="mb-2"><label class="form-label">Monto Reclamado:</label><input type="text" class="form-control"></div>
                     <div class="mb-2"><label class="form-label">Descripción / Asunto:</label><input type="text" class="form-control"></div>
                 </form>
-                <button class="btn btn-primary mt-3" onclick="nextStep()">Siguiente</button>
-                <button class="btn btn-secondary mt-3" onclick="prevStep(3)">Atrás</button>
+                <button class="btn btn-primary mt-3" onclick="showStep(5)">Siguiente</button>
             </div>
 
             <!-- Sección 3 - Detalle de Reclamo y Pedido -->
@@ -81,98 +84,29 @@
                     <div class="mb-2"><label class="form-label">Detalle:</label><textarea id="detalleReclamo" class="form-control" rows="3"></textarea></div>
                     <div class="mb-2"><label class="form-label">Pedido (Explicar de forma concreta lo que solicita):</label><textarea id="pedido" class="form-control" rows="3"></textarea></div>
                 </form>
-                <button class="btn btn-secondary mt-3" onclick="prevStep(4)">Atrás</button>
             </div>
 
         </div>
     </div>
 
     <script>
-        let alumnosDB = {
-            "41578300": {
-        "nombre": "ORIALIZ BELLIDO CHOCANO",
-        "domicilio": "JR.DANIEL HERNANDEZ 374 DPTO 502 SURCO",
-        "correo": "orializ.bellido@yahoo.com",
-        "codigo": "SV41578300",
-        "producto": "Curso excel",
-        "tipo": "Curso",
-        "sede": "Formación continua"
-    },
-    "73889810": {
-        "nombre": "Mabel Valverde chuquillanque",
-        "domicilio": "MZ.E LOTE E ASOC.VIV VILLA LOS OLIVOS - PUENTE PIEDRA",
-        "correo": "mabelvalverdech@gmail.com",
-        "codigo": "SV73889810",
-        "producto": "Power BI",
-        "tipo": "Curso",
-        "sede": "Formación continua"
-    },
-    "41028179": {
-        "nombre": "CESAR MARTIN MATAYOSHI MORITA",
-        "domicilio": "CALLE HUASCAR 459 URB. SANTA MARIA TRUJILLO  PERU",
-        "correo": "martin.matayoshi@gmail.com",
-        "codigo": "SV41028179",
-        "producto": "Markting digital",
-        "tipo": "Curso",
-        "sede": "Formación continua"
-    },
-    "47151426": {
-        "nombre": "Marly Sosa Cahuaza",
-        "domicilio": "Unidad vecinal de mirones challet 39LL",
-        "correo": "a.marlysosa@gmail.com",
-        "codigo": "a1514076",
-        "producto": "Marketing",
-        "tipo": "Carrera",
-        "sede": "Petit Thouars"
-    },
-    "47988392": {
-        "nombre": "Gabriela Villavicencio Zea",
-        "domicilio": "Urb. Las terrazas del Rosario C5 piso 5",
-        "correo": "glavilla2168@gmail.com",
-        "codigo": "IV47988392",
-        "producto": "Desarrollo de sistemas",
-        "tipo": "Curso",
-        "sede": "Sede Virtual"
-    },
-    "70834825": {
-        "nombre": "Valeria Nicole Astocondor Zafra",
-        "domicilio": "ASENT.H.CRUZ DE MOTUPE-SAN JUAN DE LURIGANCHO",
-        "correo": "valeria.astocondorz@gmail.com",
-        "codigo": "PT70834825",
-        "producto": "Administración de empresas",
-        "tipo": "Carrera",
-        "sede": "Petit Thouars"
-    },
-    "77287300": {
-        "nombre": "SALAGRAM SILA ARICA BARRIOS",
-        "domicilio": "CALLE PASCAL 250 SURQUILLO",
-        "correo": "hkijay@gmail.com",
-        "codigo": "PT77287300",
-        "producto": "Computación e informática",
-        "tipo": "Carrera",
-        "sede": "Petit Thouars"
-    },
-    "47569355": {
-        "nombre": "cristian angel quicaño contreras",
-        "domicilio": "PSJ.  ICA  101  AYACUCHO - HUAMANGA -SA JUAN BAUTISTA",
-        "correo": "cristiancontreras4755@gmail.com",
-        "codigo": "a1312903",
-        "producto": "Diseño de interiores",
-        "tipo": "Curso",
-        "sede": "Lima Norte"
-    }
-        };
-
         function nextStep() {
-            showStep(currentStep + 1);
-        }
+            let userType = document.getElementById("userType").value;
 
-        function prevStep(step) {
-            showStep(step);
+            if (userType === "alumno") {
+                showStep(2); // Solo los alumnos ingresan DNI
+            } else {
+                document.getElementById("dniHijoContainer").style.display = (userType === "padre") ? "block" : "none";
+                showStep(3); // Todos los demás van directo a Datos del Usuario
+            }
         }
 
         function verifyDNI() {
             let dni = document.getElementById("dniInput").value;
+            let alumnosDB = {
+                "41578300": { "nombre": "ORIALIZ BELLIDO CHOCANO", "domicilio": "Surco", "correo": "orializ.bellido@yahoo.com", "codigo": "SV41578300", "producto": "Curso excel", "tipo": "Curso", "sede": "Formación continua" }
+            };
+
             if (alumnosDB[dni]) {
                 let data = alumnosDB[dni];
                 document.getElementById("nombre").value = data.nombre;
@@ -191,10 +125,7 @@
         function showStep(step) {
             document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
             document.getElementById('step' + step).classList.add('active');
-            currentStep = step;
         }
-
-        let currentStep = 1;
     </script>
 
 </body>
