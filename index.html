@@ -56,7 +56,7 @@
                     <div class="mb-2"><label class="form-label">Nombres y Apellidos:</label><input type="text" id="nombre" class="form-control"></div>
                     <div class="mb-2"><label class="form-label">Domicilio:</label><input type="text" id="domicilio" class="form-control"></div>
                     <div class="mb-2"><label class="form-label">Correo:</label><input type="text" id="correo" class="form-control"></div>
-                    <div class="mb-2"><label class="form-label">Código:</label><input type="text" id="codigo" class="form-control"></div>
+                    <div class="mb-2"><label class="form-label">Código o DNI:</label><input type="text" id="codigo" class="form-control"></div>
                     <div class="mb-2"><label class="form-label">Producto:</label><input type="text" id="producto" class="form-control"></div>
                     <div class="mb-2"><label class="form-label">Tipo Producto:</label><input type="text" id="tipoProducto" class="form-control"></div>
                     <div class="mb-2"><label class="form-label">Sede:</label><input type="text" id="sede" class="form-control"></div>
@@ -104,7 +104,78 @@
         function verifyDNI() {
             let dni = document.getElementById("dniInput").value;
             let alumnosDB = {
-                "41578300": { "nombre": "ORIALIZ BELLIDO CHOCANO", "domicilio": "Surco", "correo": "orializ.bellido@yahoo.com", "codigo": "SV41578300", "producto": "Curso excel", "tipo": "Curso", "sede": "Formación continua" }
+                "41578300": {
+        "nombre": "ORIALIZ BELLIDO CHOCANO",
+        "domicilio": "JR.DANIEL HERNANDEZ 374 DPTO 502 SURCO",
+        "correo": "orializ.bellido@yahoo.com",
+        "codigo": "SV41578300",
+        "producto": "Curso excel",
+        "tipo": "Curso",
+        "sede": "Formación continua"
+    },
+    "73889810": {
+        "nombre": "Mabel Valverde chuquillanque",
+        "domicilio": "MZ.E LOTE E ASOC.VIV VILLA LOS OLIVOS - PUENTE PIEDRA",
+        "correo": "mabelvalverdech@gmail.com",
+        "codigo": "SV73889810",
+        "producto": "Power BI",
+        "tipo": "Curso",
+        "sede": "Formación continua"
+    },
+    "41028179": {
+        "nombre": "CESAR MARTIN MATAYOSHI MORITA",
+        "domicilio": "CALLE HUASCAR 459 URB. SANTA MARIA TRUJILLO  PERU",
+        "correo": "martin.matayoshi@gmail.com",
+        "codigo": "SV41028179",
+        "producto": "Markting digital",
+        "tipo": "Curso",
+        "sede": "Formación continua"
+    },
+    "47151426": {
+        "nombre": "Marly Sosa Cahuaza",
+        "domicilio": "Unidad vecinal de mirones challet 39LL",
+        "correo": "a.marlysosa@gmail.com",
+        "codigo": "a1514076",
+        "producto": "Marketing",
+        "tipo": "Carrera",
+        "sede": "Petit Thouars"
+    },
+    "47988392": {
+        "nombre": "Gabriela Villavicencio Zea",
+        "domicilio": "Urb. Las terrazas del Rosario C5 piso 5",
+        "correo": "glavilla2168@gmail.com",
+        "codigo": "IV47988392",
+        "producto": "Desarrollo de sistemas",
+        "tipo": "Curso",
+        "sede": "Sede Virtual"
+    },
+    "70834825": {
+        "nombre": "Valeria Nicole Astocondor Zafra",
+        "domicilio": "ASENT.H.CRUZ DE MOTUPE-SAN JUAN DE LURIGANCHO",
+        "correo": "valeria.astocondorz@gmail.com",
+        "codigo": "PT70834825",
+        "producto": "Administración de empresas",
+        "tipo": "Carrera",
+        "sede": "Petit Thouars"
+    },
+    "77287300": {
+        "nombre": "SALAGRAM SILA ARICA BARRIOS",
+        "domicilio": "CALLE PASCAL 250 SURQUILLO",
+        "correo": "hkijay@gmail.com",
+        "codigo": "PT77287300",
+        "producto": "Computación e informática",
+        "tipo": "Carrera",
+        "sede": "Petit Thouars"
+    },
+    "47569355": {
+        "nombre": "cristian angel quicaño contreras",
+        "domicilio": "PSJ.  ICA  101  AYACUCHO - HUAMANGA -SA JUAN BAUTISTA",
+        "correo": "cristiancontreras4755@gmail.com",
+        "codigo": "a1312903",
+        "producto": "Diseño de interiores",
+        "tipo": "Curso",
+        "sede": "Lima Norte"
+    }
             };
 
             if (alumnosDB[dni]) {
