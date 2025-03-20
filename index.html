@@ -77,14 +77,38 @@
             </div>
 
             <!-- Sección 3 - Detalle de Reclamo y Pedido -->
-            <div class="step" id="step5">
-                <div class="section-title">3. Detalle de Reclamo y Pedido del Consumidor</div>
-                <form>
-                    <div class="mb-2"><label class="form-label">Tipo de Reclamo:</label><select class="form-select"><option>--SELECCIONE--</option></select></div>
-                    <div class="mb-2"><label class="form-label">Detalle:</label><textarea id="detalleReclamo" class="form-control" rows="3"></textarea></div>
-                    <div class="mb-2"><label class="form-label">Pedido (Explicar de forma concreta lo que solicita):</label><textarea id="pedido" class="form-control" rows="3"></textarea></div>
-                </form>
-            </div>
+            <!-- Sección 3 - Detalle de Reclamo y Pedido -->
+				<div class="step" id="step5">
+					<div class="section-title">3. Detalle de Reclamo y Pedido del Consumidor</div>
+					<form>
+						<div class="mb-2">
+							<label class="form-label">Tipo de Reclamo:</label>
+							<select class="form-select">
+								<option value="" selected disabled>-- SELECCIONE --</option>
+								<option value="devolucion_matricula">Devolución / Matrícula</option>
+								<option value="acceso_plataforma">Acceso a Plataforma</option>
+								<option value="mala_atencion">Mala Atención</option>
+								<option value="cambio_horario">Cambio de Horario</option>
+								<option value="metodologia_docente">Metodología Docente</option>
+								<option value="emision_documentos">Emisión de Documentos</option>
+								<option value="devolucion_dinero">Devolución de Dinero</option>
+								<option value="cobros_factura">Cobros / Factura</option>
+								<option value="evaluaciones">Evaluaciones</option>
+								<option value="pensiones">Pensiones</option>
+								<option value="silabus">Sílabus</option>
+							</select>
+						</div>
+						<div class="mb-2">
+							<label class="form-label">Detalle:</label>
+							<textarea id="detalleReclamo" class="form-control" rows="3"></textarea>
+						</div>
+						<div class="mb-2">
+							<label class="form-label">Pedido (Explicar de forma concreta lo que solicita):</label>
+							<textarea id="pedido" class="form-control" rows="3"></textarea>
+						</div>
+					</form>
+				</div>
+
 
         </div>
     </div>
