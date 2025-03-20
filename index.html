@@ -8,6 +8,13 @@
     <style>
         .step { display: none; }  
         .active { display: block; }
+        .section-title {
+            background-color: #6c5b7b;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -23,11 +30,13 @@
                     <option value="" selected disabled>Seleccione una opción</option>
                     <option value="alumno">Alumno</option>
                     <option value="publico">Público en General</option>
+                    <option value="exalumno">Exalumno</option>
+                    <option value="padre">Padre de Familia</option>
                 </select>
                 <button class="btn btn-primary mt-3" onclick="nextStep()">Continuar</button>
             </div>
 
-            <!-- Paso 2: Si es Alumno, ingresar DNI -->
+            <!-- Paso 2: Ingreso de DNI para Alumnos -->
             <div class="step" id="step2">
                 <h4>Ingrese su DNI:</h4>
                 <input type="text" id="dniInput" class="form-control" placeholder="Ingrese su DNI">
@@ -36,107 +45,51 @@
                 <p id="dniError" class="text-danger mt-2" style="display: none;">DNI no encontrado.</p>
             </div>
 
-            <!-- Paso 3: Formulario para Alumno (Con datos cargados) -->
+            <!-- Paso 3: Sección 1 - Datos del Usuario -->
             <div class="step" id="step3">
-                <h4>Datos del Alumno</h4>
-                <form id="alumnoForm">
-                    <div class="mb-2">
-                        <label class="form-label">Nombres y Apellidos:</label>
-                        <input type="text" id="nombreAlumno" class="form-control" readonly>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Domicilio:</label>
-                        <input type="text" id="domicilioAlumno" class="form-control" readonly>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Correo:</label>
-                        <input type="text" id="correoAlumno" class="form-control" readonly>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Código:</label>
-                        <input type="text" id="codigoAlumno" class="form-control" readonly>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Producto:</label>
-                        <input type="text" id="productoAlumno" class="form-control" readonly>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Tipo Producto:</label>
-                        <input type="text" id="tipoProductoAlumno" class="form-control" readonly>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Sede:</label>
-                        <input type="text" id="sedeAlumno" class="form-control" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Detalle de Reclamo:</label>
-                        <textarea id="detalleAlumno" class="form-control"></textarea>
-                    </div>
-                    <button class="btn btn-secondary" onclick="prevStep(2)">Atrás</button>
+                <div class="section-title">1. Datos del Usuario</div>
+                <form id="userForm">
+                    <div class="mb-2"><label class="form-label">Nombres y Apellidos:</label><input type="text" id="nombre" class="form-control" readonly></div>
+                    <div class="mb-2"><label class="form-label">Domicilio:</label><input type="text" id="domicilio" class="form-control" readonly></div>
+                    <div class="mb-2"><label class="form-label">Correo:</label><input type="text" id="correo" class="form-control" readonly></div>
+                    <div class="mb-2"><label class="form-label">Código:</label><input type="text" id="codigo" class="form-control" readonly></div>
+                    <div class="mb-2"><label class="form-label">Producto:</label><input type="text" id="producto" class="form-control" readonly></div>
+                    <div class="mb-2"><label class="form-label">Tipo Producto:</label><input type="text" id="tipoProducto" class="form-control" readonly></div>
+                    <div class="mb-2"><label class="form-label">Sede:</label><input type="text" id="sede" class="form-control" readonly></div>
                 </form>
+                <button class="btn btn-primary mt-3" onclick="nextStep()">Siguiente</button>
             </div>
 
-            <!-- Paso 3: Formulario para Público en General (Campos manuales) -->
+            <!-- Sección 2 - Identificación del bien contratado -->
             <div class="step" id="step4">
-                <h4>Ingrese sus datos:</h4>
-                <form id="publicoForm">
-                    <div class="mb-2">
-                        <label class="form-label">Nombres y Apellidos:</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Domicilio:</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Correo:</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Código:</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Producto:</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Tipo Producto:</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Sede:</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Detalle de Reclamo:</label>
-                        <textarea class="form-control"></textarea>
-                    </div>
-                    <button class="btn btn-secondary" onclick="prevStep(1)">Atrás</button>
+                <div class="section-title">2. Identificación del Bien Contratado</div>
+                <form>
+                    <div class="mb-2"><label class="form-label">Clasificación:</label><select class="form-select"><option>--SELECCIONE--</option></select></div>
+                    <div class="mb-2"><label class="form-label">Tipo de Bien:</label><select class="form-select"><option>--SELECCIONE--</option></select></div>
+                    <div class="mb-2"><label class="form-label">Monto Reclamado:</label><input type="text" class="form-control"></div>
+                    <div class="mb-2"><label class="form-label">Descripción / Asunto:</label><input type="text" class="form-control"></div>
                 </form>
+                <button class="btn btn-primary mt-3" onclick="nextStep()">Siguiente</button>
+                <button class="btn btn-secondary mt-3" onclick="prevStep(3)">Atrás</button>
+            </div>
+
+            <!-- Sección 3 - Detalle de Reclamo y Pedido -->
+            <div class="step" id="step5">
+                <div class="section-title">3. Detalle de Reclamo y Pedido del Consumidor</div>
+                <form>
+                    <div class="mb-2"><label class="form-label">Tipo de Reclamo:</label><select class="form-select"><option>--SELECCIONE--</option></select></div>
+                    <div class="mb-2"><label class="form-label">Detalle:</label><textarea id="detalleReclamo" class="form-control" rows="3"></textarea></div>
+                    <div class="mb-2"><label class="form-label">Pedido (Explicar de forma concreta lo que solicita):</label><textarea id="pedido" class="form-control" rows="3"></textarea></div>
+                </form>
+                <button class="btn btn-secondary mt-3" onclick="prevStep(4)">Atrás</button>
             </div>
 
         </div>
     </div>
 
     <script>
-        function nextStep() {
-            let userType = document.getElementById("userType").value;
-            if (userType === "alumno") {
-                showStep(2);
-            } else if (userType === "publico") {
-                showStep(4);
-            }
-        }
-
-        function prevStep(step) {
-            showStep(step);
-        }
-
-        function verifyDNI() {
-            let dni = document.getElementById("dniInput").value;
-            let dniDB = {
-                "41578300": {
+        let alumnosDB = {
+            "41578300": {
         "nombre": "ORIALIZ BELLIDO CHOCANO",
         "domicilio": "JR.DANIEL HERNANDEZ 374 DPTO 502 SURCO",
         "correo": "orializ.bellido@yahoo.com",
@@ -208,16 +161,27 @@
         "tipo": "Curso",
         "sede": "Lima Norte"
     }
-            };
+        };
 
-            if (dniDB[dni]) {
-                document.getElementById("nombreAlumno").value = dniDB[dni].nombre;
-                document.getElementById("domicilioAlumno").value = dniDB[dni].domicilio;
-                document.getElementById("correoAlumno").value = dniDB[dni].correo;
-                document.getElementById("codigoAlumno").value = dniDB[dni].codigo;
-                document.getElementById("productoAlumno").value = dniDB[dni].producto;
-                document.getElementById("tipoProductoAlumno").value = dniDB[dni].tipo;
-                document.getElementById("sedeAlumno").value = dniDB[dni].sede;
+        function nextStep() {
+            showStep(currentStep + 1);
+        }
+
+        function prevStep(step) {
+            showStep(step);
+        }
+
+        function verifyDNI() {
+            let dni = document.getElementById("dniInput").value;
+            if (alumnosDB[dni]) {
+                let data = alumnosDB[dni];
+                document.getElementById("nombre").value = data.nombre;
+                document.getElementById("domicilio").value = data.domicilio;
+                document.getElementById("correo").value = data.correo;
+                document.getElementById("codigo").value = data.codigo;
+                document.getElementById("producto").value = data.producto;
+                document.getElementById("tipoProducto").value = data.tipo;
+                document.getElementById("sede").value = data.sede;
                 showStep(3);
             } else {
                 document.getElementById("dniError").style.display = "block";
@@ -227,7 +191,10 @@
         function showStep(step) {
             document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
             document.getElementById('step' + step).classList.add('active');
+            currentStep = step;
         }
+
+        let currentStep = 1;
     </script>
 
 </body>
